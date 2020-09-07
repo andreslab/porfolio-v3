@@ -7,9 +7,9 @@ from .forms import *
 def index(request):
 
     form = MessageForm()
-    projects = Project.object.all()
-    blogs = Blog.object.all()
-    contact = Contact.object.all()
+    projects = Project.objects.all()
+    blogs = Blog.objects.all()
+    contact = Contact.objects.all()
 
     if request.method == 'POST':
         form = MessageForm(request.POST)
