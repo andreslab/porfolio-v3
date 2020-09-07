@@ -4,26 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.1/dist/mini-default.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}style.css" />
 </head>
 <body>
     <h3>{{name}}</h3>
 
-    {% for project in projects %}
-        <div>{{project.title}}</div>
-    {% endfor %}
+    <div class="container bg_porfolio">
+        <h1>Porfolio</h1>
+        {% for project in projects %}
+            <div class="card content-card-class">
+            <h2>{{project.title}}</h2>
+            <img src="assets/images/img_build.png" alt="image">
+            <span>{{project.detail}}</span>
+            <div class="row content-bar-class">
+                <div class="col-sm-6">{{project.created}}</div>
+                <div class="col-sm-6 content-estatus-class">
+                <span class="alpha-class">
+                <span class="dot"></span>
+                    ALPHA
+                </span>
+                </div>
+            </div>
+            </div>
+        {% endfor %}
+    </div>
 
-    {% for blog in blogs %}
-        <div>{{blog.title}}</div>
-    {% endfor %}
+    <div class="bg_blog">
+        <h1>Blog</h1>
+        <div class="row blog-content-class">
+            {% for blog in blogs %}
+                <div class="card blog-card-class">
+                    <div class="blog-card-title-class">{{blog.title}}</div>
+                    <div class="blog-card-detail-class">{{blog.detail}}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    
 
-    {% for c in contact %}
-        <div>{{c.email}}</div>
-    {% endfor %}
+    <div class="bg_contact">
+        <h1>Contacto</h1>
+        <div class="container contact-content-class">
+        <div class="row">
+            <div class="col-md-6">
+                <form method="POST" action="/">
+                    {% csrf_token %}
+                    {{form}}
+                    <input type="submit" name="send msg">
+                </form>
+            </div>
+            <div class="col-md-6">
+            <ul>
+                {% for c in contact %}
+                    <li>{{c.email}}</li>
+                    <li>{{c.phone}}</li>
+                {% endfor %}
+            </ul>
+            </div>
+        </div>
+        </div>
+    </div>
 
-    <form method="POST" action="/">
-        {% csrf_token %}
-        {{form}}
-        <input type="submit" name="send msg">
-    </form>
 </body>
 </html>
